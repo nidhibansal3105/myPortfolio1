@@ -1,4 +1,4 @@
-import PlatformCard from "./platformCard.jsx";
+import PlatformCard from "./PlatformCard.jsx";
 import leetcode from "../assets/platLogo/leetcode.jpeg";
 import codeforces from "../assets/platLogo/codeforces.jpeg";
 import codechef from "../assets/platLogo/codechef.jpeg";
