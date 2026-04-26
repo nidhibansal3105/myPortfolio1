@@ -1,5 +1,5 @@
 import '../../src/index.css'
-import ElectricBorder from '..BitsComponent/ElectricBorder'
+import ElectricBorder from '../BitsComponent/ElectricBorder'
 
 function About(){
     return(
