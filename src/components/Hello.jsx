@@ -1,5 +1,5 @@
 import LetterGlitch from "../BitsComponent/LetterGlitch";
-import CenterMain from "./CenterMain";
+import CenterMain from "./centerMain";
 
 function Hello() {
   return (
