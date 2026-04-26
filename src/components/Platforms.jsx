@@ -12,9 +12,9 @@ const platforms = [
     },
     {
         head: "CodeChef",
-        content: "I have solved over 100 questions and have a 2-star rating.",
+        content: "I have solved over 50 questions and have a (1453)2-star rating.",
         image: codechef,
-        url: "#"
+        url: "https://www.codechef.com/users/nidhib3105"
     },
     {
         head: "CodeForces",
@@ -27,7 +27,7 @@ const platforms = [
 
 const Platform = () => {
     return (
-        <div className="plat-card-holder flex justify-center items-center flex-wrap gap-30">
+        <div className="plat-card-holder flex justify-center items-center flex-wrap gap-[10vw]">
             {platforms.map((p) => (
                 <PlatformCard
                     key={p.head}

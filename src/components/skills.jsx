@@ -11,6 +11,26 @@ import { SiMysql } from "react-icons/si";
 import SkillCard from "./skillCard";
 const hunar = [
   {
+    name: "Python.",
+    logo: <FaPython />,
+  },
+  {
+    name: "CC++",
+    logo: "C/C++",
+  },
+  {
+    name: "Java.",
+    logo: <FaJava />,
+  },
+  {
+    name: "JvaScript",
+    logo: <FaJsSquare />,
+  },
+  {
+    name: "MySQL",
+    logo: <SiMysql />,
+  },
+  {
     name: "HTML",
     logo: <FaHtml5 />,
   },
@@ -50,13 +70,13 @@ const hunar = [
 function Skills() {
   return (
     <>
-      <div className="skill-head flex flex-col justify-center items-center">
-        <span className="gradient-text">Skill Set</span>
-        <div className="skill-set flex justify-center items-center gap-15">
+    <div className="skill-cont flex flex-col justify-center items-center">
+      <span className="gradient-text text-[5vw]">Skill Set</span>
+      <div className="skill-head flex justify-center items-center">
           {hunar.map((skill) => (
             <SkillCard key={skill.name} name={skill.name} logo={skill.logo} />
           ))}
-        </div>
+      </div>
       </div>
     </>
   );

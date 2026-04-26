@@ -35,25 +35,22 @@ const ElectricBorder = ({
     return (Math.sin(x * 12.9898) * 43758.5453) % 1;
   }, []);
 
-  const noise2D = useCallback(
-    (x, y) => {
-      const i = Math.floor(x);
-      const j = Math.floor(y);
-      const fx = x - i;
-      const fy = y - j;
+  const noise2D = useCallback((x, y) => {
+    const i = Math.floor(x);
+    const j = Math.floor(y);
+    const fx = x - i;
+    const fy = y - j;
 
-      const a = random(i + j * 57);
-      const b = random(i + 1 + j * 57);
-      const c = random(i + (j + 1) * 57);
-      const d = random(i + 1 + (j + 1) * 57);
+    const a = random(i + j * 57);
+    const b = random(i + 1 + j * 57);
+    const c = random(i + (j + 1) * 57);
+    const d = random(i + 1 + (j + 1) * 57);
 
-      const ux = fx * fx * (3.0 - 2.0 * fx);
-      const uy = fy * fy * (3.0 - 2.0 * fy);
+    const ux = fx * fx * (3.0 - 2.0 * fx);
+    const uy = fy * fy * (3.0 - 2.0 * fy);
 
-      return a * (1 - ux) * (1 - uy) + b * ux * (1 - uy) + c * (1 - ux) * uy + d * ux * uy;
-    },
-    [random]
-  );
+    return a * (1 - ux) * (1 - uy) + b * ux * (1 - uy) + c * (1 - ux) * uy + d * ux * uy;
+  }, [random]);
 
   const octavedNoise = useCallback(
     (x, octaves, lacunarity, gain, baseAmplitude, baseFrequency, time, seed, baseFlatness) => {
@@ -84,63 +81,81 @@ const ElectricBorder = ({
     };
   }, []);
 
-  const getRoundedRectPoint = useCallback(
-    (t, left, top, width, height, radius) => {
-      const straightWidth = width - 2 * radius;
-      const straightHeight = height - 2 * radius;
-      const cornerArc = (Math.PI * radius) / 2;
-      const totalPerimeter = 2 * straightWidth + 2 * straightHeight + 4 * cornerArc;
-      const distance = t * totalPerimeter;
+  const getRoundedRectPoint = useCallback((t, left, top, width, height, radius) => {
+    const straightWidth = width - 2 * radius;
+    const straightHeight = height - 2 * radius;
+    const cornerArc = (Math.PI * radius) / 2;
+    const totalPerimeter = 2 * straightWidth + 2 * straightHeight + 4 * cornerArc;
+    const distance = t * totalPerimeter;
 
-      let accumulated = 0;
+    let accumulated = 0;
 
-      if (distance <= accumulated + straightWidth) {
-        const progress = (distance - accumulated) / straightWidth;
-        return { x: left + radius + progress * straightWidth, y: top };
-      }
-      accumulated += straightWidth;
+    if (distance <= accumulated + straightWidth) {
+      const progress = (distance - accumulated) / straightWidth;
+      return { x: left + radius + progress * straightWidth, y: top };
+    }
+    accumulated += straightWidth;
 
-      if (distance <= accumulated + cornerArc) {
-        const progress = (distance - accumulated) / cornerArc;
-        return getCornerPoint(left + width - radius, top + radius, radius, -Math.PI / 2, Math.PI / 2, progress);
-      }
-      accumulated += cornerArc;
-
-      if (distance <= accumulated + straightHeight) {
-        const progress = (distance - accumulated) / straightHeight;
-        return { x: left + width, y: top + radius + progress * straightHeight };
-      }
-      accumulated += straightHeight;
-
-      if (distance <= accumulated + cornerArc) {
-        const progress = (distance - accumulated) / cornerArc;
-        return getCornerPoint(left + width - radius, top + height - radius, radius, 0, Math.PI / 2, progress);
-      }
-      accumulated += cornerArc;
-
-      if (distance <= accumulated + straightWidth) {
-        const progress = (distance - accumulated) / straightWidth;
-        return { x: left + width - radius - progress * straightWidth, y: top + height };
-      }
-      accumulated += straightWidth;
-
-      if (distance <= accumulated + cornerArc) {
-        const progress = (distance - accumulated) / cornerArc;
-        return getCornerPoint(left + radius, top + height - radius, radius, Math.PI / 2, Math.PI / 2, progress);
-      }
-      accumulated += cornerArc;
-
-      if (distance <= accumulated + straightHeight) {
-        const progress = (distance - accumulated) / straightHeight;
-        return { x: left, y: top + height - radius - progress * straightHeight };
-      }
-      accumulated += straightHeight;
-
+    if (distance <= accumulated + cornerArc) {
       const progress = (distance - accumulated) / cornerArc;
-      return getCornerPoint(left + radius, top + radius, radius, Math.PI, Math.PI / 2, progress);
-    },
-    [getCornerPoint]
-  );
+      return getCornerPoint(
+        left + width - radius,
+        top + radius,
+        radius,
+        -Math.PI / 2,
+        Math.PI / 2,
+        progress
+      );
+    }
+    accumulated += cornerArc;
+
+    if (distance <= accumulated + straightHeight) {
+      const progress = (distance - accumulated) / straightHeight;
+      return { x: left + width, y: top + radius + progress * straightHeight };
+    }
+    accumulated += straightHeight;
+
+    if (distance <= accumulated + cornerArc) {
+      const progress = (distance - accumulated) / cornerArc;
+      return getCornerPoint(
+        left + width - radius,
+        top + height - radius,
+        radius,
+        0,
+        Math.PI / 2,
+        progress
+      );
+    }
+    accumulated += cornerArc;
+
+    if (distance <= accumulated + straightWidth) {
+      const progress = (distance - accumulated) / straightWidth;
+      return { x: left + width - radius - progress * straightWidth, y: top + height };
+    }
+    accumulated += straightWidth;
+
+    if (distance <= accumulated + cornerArc) {
+      const progress = (distance - accumulated) / cornerArc;
+      return getCornerPoint(
+        left + radius,
+        top + height - radius,
+        radius,
+        Math.PI / 2,
+        Math.PI / 2,
+        progress
+      );
+    }
+    accumulated += cornerArc;
+
+    if (distance <= accumulated + straightHeight) {
+      const progress = (distance - accumulated) / straightHeight;
+      return { x: left, y: top + height - radius - progress * straightHeight };
+    }
+    accumulated += straightHeight;
+
+    const progress = (distance - accumulated) / cornerArc;
+    return getCornerPoint(left + radius, top + radius, radius, Math.PI, Math.PI / 2, progress);
+  }, [getCornerPoint]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -271,27 +286,24 @@ const ElectricBorder = ({
     <div
       ref={containerRef}
       className={`relative overflow-visible isolate ${className ?? ''}`}
-      style={{ '--electric-border-color': color, borderRadius, ...style }}
-    >
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-2">
+      style={{ '--electric-border-color': color, borderRadius, margin: "5rem", ...style }}>
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-2">
         <canvas ref={canvasRef} className="block" />
       </div>
       <div className="absolute inset-0 rounded-[inherit] pointer-events-none z-0">
         <div
           className="absolute inset-0 rounded-[inherit] pointer-events-none"
-          style={{ border: `2px solid ${hexToRgba(color, 0.6)}`, filter: 'blur(1px)' }}
-        />
+          style={{ border: `2px solid ${hexToRgba(color, 0.6)}`, filter: 'blur(1px)' }} />
         <div
           className="absolute inset-0 rounded-[inherit] pointer-events-none"
-          style={{ border: `2px solid ${color}`, filter: 'blur(4px)' }}
-        />
+          style={{ border: `2px solid ${color}`, filter: 'blur(4px)' }} />
         <div
           className="absolute inset-0 rounded-[inherit] pointer-events-none -z-1 scale-110 opacity-30"
           style={{
             filter: 'blur(32px)',
             background: `linear-gradient(-30deg, ${color}, transparent, ${color})`
-          }}
-        />
+          }} />
       </div>
       <div className="relative rounded-[inherit] z-1">{children}</div>
     </div>
