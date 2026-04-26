@@ -1,8 +1,8 @@
-import About from "./About.jsx";
-import Skills from "./Skills.jsx";
-import Navbar from "./Navbar.jsx"
-import Platforms from "./Platforms.jsx";
-import Contact from "./Contact.jsx";
+import About from "./About";
+import Skills from "./Skills";
+import Navbar from "./Navbar"
+import Platforms from "./Platforms";
+import Contact from "./Contact";
 
 function App() {
     const handleTabClick = (str, setActiveTab, setPos) => {
