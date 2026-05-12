@@ -1,8 +1,8 @@
 import About from "./About";
-import Skills from "./Skills";
+import Skills from "./skills";
 import Navbar from "./Navbar"
 import Platforms from "./Platforms";
-import Contact from "./Contact";
+import Contact from "./contact";
 
 function App() {
     const handleTabClick = (str, setActiveTab, setPos) => {
