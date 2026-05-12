@@ -20,7 +20,7 @@ function About(){
                     I'm <span>NIDHI BANSAL</span>
                     <p>A passionate Computer Science undergraduate who loves exploring algorithms, coding solutions, and building logical systems. Currently in my second year of B.Tech, I am focused on strengthening my fundamentals while actively learning modern technologies to become a skilled and adaptable software engineer.</p>
                 </div>
-                <a href="../../public/Resume.pdf" target="_blank"><button className="downloadCV">Download CV</button></a>
+                <a href="../../Resume.pdf" target="_blank"><button className="downloadCV">Download CV</button></a>
             </div>
         </div>
         </ElectricBorder>
