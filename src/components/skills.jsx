@@ -8,7 +8,7 @@ import {
   FaReact,
 } from "react-icons/fa";
 import { SiMysql } from "react-icons/si";
-import SkillCard from "./SkillCard";
+import SkillCard from "./skillCard";
 const hunar = [
   {
     name: "Python.",
