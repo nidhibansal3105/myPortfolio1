@@ -345,7 +345,6 @@
 .cont-form textarea{
     width : 100%;
     font-size: 1vw;
-    height: 3vw;
     padding: 1vw;
     border-radius: 1.3vw;
     background-color: rgb(146, 167, 180);
@@ -400,6 +399,9 @@ canvas {
     display: block;
   }
 
+ textarea::placeholder,input::placeholder{
+    color: rgb(0, 0, 0);
+  }
 
   /* responsiveness */
 @media (max-width: 550px){
